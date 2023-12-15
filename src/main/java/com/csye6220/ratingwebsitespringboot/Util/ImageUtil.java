@@ -13,18 +13,18 @@ import java.util.UUID;
 
 public class ImageUtil {
     public static boolean GenerateImage(String base64Str, String imgFilePath) {
-        if (base64Str == null) // 图像数据为空
+        if (base64Str == null) // Data is empty
             return false;
         Base64.Decoder decoder = Base64.getDecoder();
         try {
-            // Base64解码
+            // Base64 decode
             byte[] bytes = decoder.decode(base64Str);
             for (int i = 0; i < bytes.length; ++i) {
-                if (bytes[i] < 0) {// 调整异常数据
+                if (bytes[i] < 0) {
                     bytes[i] += 256;
                 }
             }
-            // 生成jpeg图片
+            // Build JPG picture
             OutputStream out = new FileOutputStream(imgFilePath);
             out.write(bytes);
             out.flush();
@@ -35,6 +35,7 @@ public class ImageUtil {
         }
     }
 
+    // Get a random image name by using UUID
     public static String getImageName() {
         UUID uuid = UUID.randomUUID();
         String uniqueId = uuid.toString();
@@ -46,15 +47,14 @@ public class ImageUtil {
     public static String getImageAsBase64(String img_path, String img_type) {
         String base64Image = "";
         try {
-            // 读取图片文件的字节数组
+            // Get bytes array
             byte[] imageBytes = readImageBytes(img_path);
             Base64.Encoder encoder = Base64.getEncoder();
 
-            // 将字节数组转换为Base64编码的字符串
+            // Transfer to Base64 String
             base64Image = encoder.encodeToString(imageBytes);
         } catch (Exception e) {
             e.printStackTrace();
-            // 处理异常情况
         }
         StringBuilder builder = new StringBuilder();
         builder.append("data:image/");
@@ -65,12 +65,8 @@ public class ImageUtil {
         return builder.toString();
     }
 
+    // Get image from path
     public static byte[] readImageBytes(String imagePath) throws Exception {
-        // 如果图片位于 resources 目录下，可以使用 ClassPathResource 获取资源
-        // Resource resource = new ClassPathResource(imagePath);
-        // InputStream inputStream = resource.getInputStream();
-
-        // 如果图片在文件系统中，可以使用 Paths 获取文件路径
         Path path = Paths.get(imagePath);
         return Files.readAllBytes(path);
     }

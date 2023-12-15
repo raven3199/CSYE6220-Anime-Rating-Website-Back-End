@@ -26,8 +26,10 @@ public class Anime {
     @Column(name = "update_day")
     private Integer update_day;
 
+    @Column(name = "img_content")
     private String img_content;
 
+    @Column(name = "img_type")
     private String img_type;
 
     public Integer getId() {
@@ -102,5 +104,12 @@ public class Anime {
 
     public void setImg_type(String img_type) {
         this.img_type = img_type;
+    }
+
+    @Override
+    public String toString() {
+        return "Anime: [id=" + id + ", anime_name=" + anime_name + ", img_path_name=" + img_path_name
+                + ", total_credit=" + total_credit + ", total_times=" + total_times + ", update_day="
+                + update_day + ", img_type=" + img_type + "]";
     }
 }

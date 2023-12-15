@@ -57,4 +57,9 @@ public class Operation {
         this.user_id = 0;
         this.credit = (double) 0;
     }
+
+    @Override
+    public String toString() {
+        return "Operation: [id=" + id + ", anime_id=" + anime_id + ", user_id=" + user_id + ", credit=" + credit + "]";
+    }
 }
